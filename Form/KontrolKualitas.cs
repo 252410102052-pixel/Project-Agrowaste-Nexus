@@ -86,9 +86,7 @@ namespace AgroWasteNexus.Forms
                 else
                 {
                     txtIdProduksi.Clear();
-                    MessageBox.Show(
-                        "Tidak ada data produksi yang belum memiliki kontrol kualitas."
-                    );
+
                 }
             }
             catch (Exception ex)
@@ -240,18 +238,10 @@ namespace AgroWasteNexus.Forms
                 if (!AmbilDataForm(out ModelKontrolKualitas data, true))
                     return;
 
-                repository.FinalisasiQcTotal(
-                    data.IdKontrol,
-                    data.IdProduksi,
-                    data.JumlahLolos,
-                    data.JumlahGagal,
-                    data.NilaiKualitas,
-                    data.TanggalPemeriksaan,
-                    data.Catatan
-                );
+                repository.Update(data);
 
                 MessageBox.Show(
-                    "Data kontrol kualitas berhasil diupdate dan difinalisasi."
+                    "Data kontrol kualitas berhasil diupdate."
                 );
 
                 LoadData();
@@ -268,7 +258,6 @@ namespace AgroWasteNexus.Forms
                 );
             }
         }
-
         private void btnHapus_Click(object sender, EventArgs e)
         {
             try

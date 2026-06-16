@@ -234,15 +234,15 @@ namespace AgroWasteNexus.Repositories
                     try
                     {
                         string query = @"
-                            CALL sp_finalisasi_qc_total(
-                                @idKontrol,
-                                @idProduksi,
-                                @jumlahLolos,
-                                @jumlahGagal,
-                                @nilaiKualitas,
-                                @tanggalPemeriksaan,
-                                @catatan
-                            )";
+                    CALL sp_finalisasi_qc_total(
+                        @idKontrol,
+                        @idProduksi,
+                        @jumlahLolos,
+                        @jumlahGagal,
+                        @nilaiKualitas,
+                        CAST(@tanggalPemeriksaan AS DATE),
+                        @catatan
+                    )";
 
                         using (var cmd = new NpgsqlCommand(query, conn))
                         {
