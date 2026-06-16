@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.grpMenu = new System.Windows.Forms.GroupBox();
+            this.btnGrafik = new System.Windows.Forms.Button();
             this.btnLaporan = new System.Windows.Forms.Button();
             this.lblMenuUtama = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
@@ -53,6 +54,7 @@
             // grpMenu
             // 
             this.grpMenu.BackColor = System.Drawing.Color.Transparent;
+            this.grpMenu.Controls.Add(this.btnGrafik);
             this.grpMenu.Controls.Add(this.btnLaporan);
             this.grpMenu.Controls.Add(this.lblMenuUtama);
             this.grpMenu.Controls.Add(this.btnLogout);
@@ -63,17 +65,27 @@
             this.grpMenu.Controls.Add(this.btnBatchLimbah);
             this.grpMenu.Font = new System.Drawing.Font("Century", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpMenu.ForeColor = System.Drawing.Color.DarkGreen;
-            this.grpMenu.Location = new System.Drawing.Point(12, 228);
+            this.grpMenu.Location = new System.Drawing.Point(63, 235);
             this.grpMenu.Name = "grpMenu";
-            this.grpMenu.Size = new System.Drawing.Size(960, 353);
+            this.grpMenu.Size = new System.Drawing.Size(1012, 353);
             this.grpMenu.TabIndex = 5;
             this.grpMenu.TabStop = false;
             this.grpMenu.Text = "Menu Utama";
             // 
+            // btnGrafik
+            // 
+            this.btnGrafik.Location = new System.Drawing.Point(769, 170);
+            this.btnGrafik.Name = "btnGrafik";
+            this.btnGrafik.Size = new System.Drawing.Size(176, 61);
+            this.btnGrafik.TabIndex = 10;
+            this.btnGrafik.Text = "📈 GRAFIK";
+            this.btnGrafik.UseVisualStyleBackColor = true;
+            this.btnGrafik.Click += new System.EventHandler(this.btnGrafik_Click);
+            // 
             // btnLaporan
             // 
             this.btnLaporan.Font = new System.Drawing.Font("Century", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLaporan.Location = new System.Drawing.Point(692, 169);
+            this.btnLaporan.Location = new System.Drawing.Point(502, 169);
             this.btnLaporan.Name = "btnLaporan";
             this.btnLaporan.Size = new System.Drawing.Size(229, 61);
             this.btnLaporan.TabIndex = 9;
@@ -85,9 +97,9 @@
             // 
             this.lblMenuUtama.BackColor = System.Drawing.Color.DarkGreen;
             this.lblMenuUtama.ForeColor = System.Drawing.Color.Ivory;
-            this.lblMenuUtama.Location = new System.Drawing.Point(-4, -2);
+            this.lblMenuUtama.Location = new System.Drawing.Point(0, 0);
             this.lblMenuUtama.Name = "lblMenuUtama";
-            this.lblMenuUtama.Size = new System.Drawing.Size(971, 33);
+            this.lblMenuUtama.Size = new System.Drawing.Size(1012, 33);
             this.lblMenuUtama.TabIndex = 7;
             this.lblMenuUtama.Text = "MENU UTAMA";
             // 
@@ -115,7 +127,7 @@
             // btnDistribusi
             // 
             this.btnDistribusi.Font = new System.Drawing.Font("Century", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDistribusi.Location = new System.Drawing.Point(357, 170);
+            this.btnDistribusi.Location = new System.Drawing.Point(248, 169);
             this.btnDistribusi.Name = "btnDistribusi";
             this.btnDistribusi.Size = new System.Drawing.Size(229, 61);
             this.btnDistribusi.TabIndex = 3;
@@ -125,7 +137,7 @@
             // 
             // btnProduksi
             // 
-            this.btnProduksi.Location = new System.Drawing.Point(54, 170);
+            this.btnProduksi.Location = new System.Drawing.Point(21, 169);
             this.btnProduksi.Name = "btnProduksi";
             this.btnProduksi.Size = new System.Drawing.Size(204, 61);
             this.btnProduksi.TabIndex = 2;
@@ -160,9 +172,9 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 616);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 650);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1036, 32);
+            this.statusStrip1.Size = new System.Drawing.Size(1163, 32);
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -243,7 +255,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1036, 648);
+            this.ClientSize = new System.Drawing.Size(1163, 682);
             this.Controls.Add(this.lblRole);
             this.Controls.Add(this.lblWelcome);
             this.Controls.Add(this.label2);
@@ -281,5 +293,6 @@
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Label lblRole;
         private System.Windows.Forms.Button btnLaporan;
+        private System.Windows.Forms.Button btnGrafik;
     }
 }

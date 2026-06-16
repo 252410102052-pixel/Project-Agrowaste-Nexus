@@ -1,33 +1,46 @@
 ﻿using AgrowasteNexus.Database;
 using AgroWasteNexus.Models;
 using Npgsql;
+using System;
 using System.Collections.Generic;
-using System.Data;
-
 
 namespace AgroWasteNexus.Repositories
 {
     public class JadwalPengangkutanRepository
-        : BaseRepository<JadwalPengangkutanModel>
     {
-        public override List<JadwalPengangkutanModel> GetAll()
+        public class PetugasCombo
         {
-            List<JadwalPengangkutanModel> list =
-                new List<JadwalPengangkutanModel>();
+            public int IdPetugas { get; set; }
+            public string NamaPetugas { get; set; }
+        }
+
+        public class KendaraanCombo
+        {
+            public int IdKendaraan { get; set; }
+            public string NamaKendaraan { get; set; }
+        }
+
+        public List<JadwalPengangkutanGrid> GetGrid()
+        {
+            List<JadwalPengangkutanGrid> list = new List<JadwalPengangkutanGrid>();
 
             using (var conn = DbConnectionHelper.GetConnection())
             {
                 conn.Open();
 
                 string query = @"
-                    SELECT
+                    SELECT 
                         id_jadwal,
-                        tanggal_pengangkutan,
-                        status,
-                        catatan,
                         petugas_id_petugas,
-                        kendaraan_id_kendaraan
-                    FROM jadwal_pengangkutan
+                        kendaraan_id_kendaraan,
+                        tanggal_pengangkutan,
+                        status_pengangkutan,
+                        catatan,
+                        nama_driver,
+                        kontak_driver,
+                        nama_kendaraan,
+                        kapasitas_maksimal
+                    FROM v_grid_jadwal_pengangkutan
                     ORDER BY id_jadwal";
 
                 using (var cmd = new NpgsqlCommand(query, conn))
@@ -35,15 +48,20 @@ namespace AgroWasteNexus.Repositories
                 {
                     while (reader.Read())
                     {
-                        list.Add(new JadwalPengangkutanModel
-                        {
-                            IdJadwal = reader.GetInt32(0),
-                            TanggalPengangkutan = reader.GetDateTime(1),
-                            Status = reader.GetString(2),
-                            Catatan = reader.IsDBNull(3) ? "" : reader.GetString(3),
-                            IdPetugas = reader.GetInt32(4),
-                            IdKendaraan = reader.GetInt32(5)
-                        });
+                        JadwalPengangkutanGrid data = new JadwalPengangkutanGrid();
+
+                        data.id_jadwal = Convert.ToInt32(reader["id_jadwal"]);
+                        data.petugas_id_petugas = Convert.ToInt32(reader["petugas_id_petugas"]);
+                        data.kendaraan_id_kendaraan = Convert.ToInt32(reader["kendaraan_id_kendaraan"]);
+                        data.tanggal_pengangkutan = Convert.ToDateTime(reader["tanggal_pengangkutan"]);
+                        data.status_pengangkutan = reader["status_pengangkutan"].ToString();
+                        data.catatan = reader["catatan"].ToString();
+                        data.nama_driver = reader["nama_driver"].ToString();
+                        data.kontak_driver = reader["kontak_driver"].ToString();
+                        data.nama_kendaraan = reader["nama_kendaraan"].ToString();
+                        data.kapasitas_maksimal = reader["kapasitas_maksimal"].ToString();
+
+                        list.Add(data);
                     }
                 }
             }
@@ -62,11 +80,8 @@ namespace AgroWasteNexus.Repositories
                 string query = @"
                     SELECT enumlabel
                     FROM pg_enum
-                    WHERE enumtypid = (
-                        SELECT oid
-                        FROM pg_type
-                        WHERE typname = 'enum_status_jadwal'
-                    )";
+                    WHERE enumtypid = 'enum_status_jadwal'::regtype
+                    ORDER BY enumsortorder";
 
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
@@ -80,58 +95,211 @@ namespace AgroWasteNexus.Repositories
 
             return list;
         }
-        public DataTable GetPetugas()
+        public void UpdateStatusJadwal(int idJadwal, string statusBaru)
+
         {
-            DataTable dt = new DataTable();
+
+            using (var conn = DbConnectionHelper.GetConnection())
+
+            {
+
+                conn.Open();
+
+
+
+                using (var transaction = conn.BeginTransaction())
+
+                {
+
+                    try
+
+                    {
+
+                        string query = @"
+
+                    CALL sp_atur_status_jadwal(
+
+                        @idJadwal,
+
+                        CAST(@statusBaru AS enum_status_jadwal)
+
+                    )";
+
+                        using (var cmd = new NpgsqlCommand(query, conn))
+
+                        {
+
+                            cmd.Transaction = transaction;
+
+                            cmd.Parameters.AddWithValue("@idJadwal", idJadwal);
+
+                            cmd.Parameters.AddWithValue("@statusBaru", statusBaru);
+
+                            cmd.ExecuteNonQuery();
+
+                        }
+
+                        transaction.Commit();
+
+                    }
+
+                    catch
+
+                    {
+
+                        transaction.Rollback();
+
+                        throw;
+
+                    }
+
+                }
+
+            }
+
+        }
+        public List<PetugasCombo> GetPetugas()
+        {
+            List<PetugasCombo> list = new List<PetugasCombo>();
 
             using (var conn = DbConnectionHelper.GetConnection())
             {
                 conn.Open();
 
-                string query =
-                    "SELECT id_petugas, nama_petugas FROM petugas ORDER BY nama_petugas";
+                string query = @"
+                    SELECT id_petugas, nama_petugas
+                    FROM petugas
+                    ORDER BY nama_petugas";
 
-                using (var da = new NpgsqlDataAdapter(query, conn))
+                using (var cmd = new NpgsqlCommand(query, conn))
+                using (var reader = cmd.ExecuteReader())
                 {
-                    da.Fill(dt);
+                    while (reader.Read())
+                    {
+                        PetugasCombo data = new PetugasCombo();
+
+                        data.IdPetugas = Convert.ToInt32(reader["id_petugas"]);
+                        data.NamaPetugas = reader["nama_petugas"].ToString();
+
+                        list.Add(data);
+                    }
                 }
             }
 
-            return dt;
+            return list;
         }
 
-        public DataTable GetKendaraan()
+        public List<KendaraanCombo> GetKendaraan()
         {
-            DataTable dt = new DataTable();
+            List<KendaraanCombo> list = new List<KendaraanCombo>();
 
             using (var conn = DbConnectionHelper.GetConnection())
             {
                 conn.Open();
 
-                string query =
-                    "SELECT id_kendaraan, nama_kendaraan FROM kendaraan ORDER BY nama_kendaraan";
+                string query = @"
+                    SELECT id_kendaraan, nama_kendaraan
+                    FROM kendaraan
+                    ORDER BY nama_kendaraan";
 
-                using (var da = new NpgsqlDataAdapter(query, conn))
+                using (var cmd = new NpgsqlCommand(query, conn))
+                using (var reader = cmd.ExecuteReader())
                 {
-                    da.Fill(dt);
+                    while (reader.Read())
+                    {
+                        KendaraanCombo data = new KendaraanCombo();
+
+                        data.IdKendaraan = Convert.ToInt32(reader["id_kendaraan"]);
+                        data.NamaKendaraan = reader["nama_kendaraan"].ToString();
+
+                        list.Add(data);
+                    }
                 }
             }
 
-            return dt;
-        }
-        public override void Insert(JadwalPengangkutanModel entity)
-        {
-            throw new System.NotImplementedException();
+            return list;
         }
 
-        public override void Update(JadwalPengangkutanModel entity)
+        public void Insert(JadwalPengangkutan data)
         {
-            throw new System.NotImplementedException();
+            using (var conn = DbConnectionHelper.GetConnection())
+            {
+                conn.Open();
+
+                string query = @"
+                    INSERT INTO jadwal_pengangkutan
+                    (
+                        tanggal_pengangkutan,
+                        status,
+                        catatan,
+                        petugas_id_petugas,
+                        kendaraan_id_kendaraan
+                    )
+                    VALUES
+                    (
+                        @tanggal,
+                        @status::enum_status_jadwal,
+                        @catatan,
+                        @idPetugas,
+                        @idKendaraan
+                    )";
+
+                using (var cmd = new NpgsqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@tanggal", data.TanggalPengangkutan.Date);
+                    cmd.Parameters.AddWithValue("@status", data.Status);
+                    cmd.Parameters.AddWithValue("@catatan", string.IsNullOrWhiteSpace(data.Catatan) ? (object)DBNull.Value : data.Catatan);
+                    cmd.Parameters.AddWithValue("@idPetugas", data.IdPetugas);
+                    cmd.Parameters.AddWithValue("@idKendaraan", data.IdKendaraan);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
-        public override void Delete(int id)
+        public void Update(JadwalPengangkutan data)
         {
-            throw new System.NotImplementedException();
+            using (var conn = DbConnectionHelper.GetConnection())
+            {
+                conn.Open();
+
+                string query = @"
+                    UPDATE jadwal_pengangkutan SET
+                        tanggal_pengangkutan = @tanggal,
+                        status = @status::enum_status_jadwal,
+                        catatan = @catatan,
+                        petugas_id_petugas = @idPetugas,
+                        kendaraan_id_kendaraan = @idKendaraan
+                    WHERE id_jadwal = @idJadwal";
+
+                using (var cmd = new NpgsqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@idJadwal", data.IdJadwal);
+                    cmd.Parameters.AddWithValue("@tanggal", data.TanggalPengangkutan.Date);
+                    cmd.Parameters.AddWithValue("@status", data.Status);
+                    cmd.Parameters.AddWithValue("@catatan", string.IsNullOrWhiteSpace(data.Catatan) ? (object)DBNull.Value : data.Catatan);
+                    cmd.Parameters.AddWithValue("@idPetugas", data.IdPetugas);
+                    cmd.Parameters.AddWithValue("@idKendaraan", data.IdKendaraan);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Delete(int idJadwal)
+        {
+            using (var conn = DbConnectionHelper.GetConnection())
+            {
+                conn.Open();
+
+                string query = "DELETE FROM jadwal_pengangkutan WHERE id_jadwal = @idJadwal";
+
+                using (var cmd = new NpgsqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@idJadwal", idJadwal);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

@@ -137,7 +137,7 @@
             this.btnKembali.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnKembali.Location = new System.Drawing.Point(636, 661);
             this.btnKembali.Name = "btnKembali";
-            this.btnKembali.Size = new System.Drawing.Size(133, 37);
+            this.btnKembali.Size = new System.Drawing.Size(151, 37);
             this.btnKembali.TabIndex = 4;
             this.btnKembali.Text = "Kembali";
             this.btnKembali.UseVisualStyleBackColor = false;

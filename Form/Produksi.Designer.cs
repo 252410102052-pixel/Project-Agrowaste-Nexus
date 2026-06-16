@@ -60,13 +60,12 @@
             // 
             // lblDataProduksi
             // 
-            this.lblDataProduksi.AutoSize = true;
             this.lblDataProduksi.BackColor = System.Drawing.Color.Transparent;
             this.lblDataProduksi.ForeColor = System.Drawing.Color.DarkGreen;
             this.lblDataProduksi.Location = new System.Drawing.Point(188, 42);
             this.lblDataProduksi.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
             this.lblDataProduksi.Name = "lblDataProduksi";
-            this.lblDataProduksi.Size = new System.Drawing.Size(383, 47);
+            this.lblDataProduksi.Size = new System.Drawing.Size(406, 50);
             this.lblDataProduksi.TabIndex = 0;
             this.lblDataProduksi.Text = "DATA PRODUKSI";
             this.lblDataProduksi.Click += new System.EventHandler(this.label1_Click);
@@ -92,9 +91,9 @@
             this.grpDataKontrolKualitas.Controls.Add(this.txtIdProduksi);
             this.grpDataKontrolKualitas.Font = new System.Drawing.Font("Century", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpDataKontrolKualitas.ForeColor = System.Drawing.Color.DarkGreen;
-            this.grpDataKontrolKualitas.Location = new System.Drawing.Point(12, 157);
+            this.grpDataKontrolKualitas.Location = new System.Drawing.Point(18, 137);
             this.grpDataKontrolKualitas.Name = "grpDataKontrolKualitas";
-            this.grpDataKontrolKualitas.Size = new System.Drawing.Size(823, 245);
+            this.grpDataKontrolKualitas.Size = new System.Drawing.Size(864, 245);
             this.grpDataKontrolKualitas.TabIndex = 2;
             this.grpDataKontrolKualitas.TabStop = false;
             this.grpDataKontrolKualitas.Text = "📋 DATA PRODUKSI";
@@ -113,7 +112,7 @@
             // txtBiayaProduksi
             // 
             this.txtBiayaProduksi.Font = new System.Drawing.Font("Century", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBiayaProduksi.Location = new System.Drawing.Point(593, 140);
+            this.txtBiayaProduksi.Location = new System.Drawing.Point(613, 140);
             this.txtBiayaProduksi.Name = "txtBiayaProduksi";
             this.txtBiayaProduksi.Size = new System.Drawing.Size(204, 29);
             this.txtBiayaProduksi.TabIndex = 13;
@@ -140,7 +139,7 @@
             // cmbStatus
             // 
             this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(593, 188);
+            this.cmbStatus.Location = new System.Drawing.Point(613, 182);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(204, 31);
             this.cmbStatus.TabIndex = 10;
@@ -156,7 +155,7 @@
             // txtJumlahHasil
             // 
             this.txtJumlahHasil.Font = new System.Drawing.Font("Century", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtJumlahHasil.Location = new System.Drawing.Point(593, 98);
+            this.txtJumlahHasil.Location = new System.Drawing.Point(613, 93);
             this.txtJumlahHasil.Name = "txtJumlahHasil";
             this.txtJumlahHasil.Size = new System.Drawing.Size(204, 29);
             this.txtJumlahHasil.TabIndex = 8;
@@ -199,7 +198,7 @@
             // txtJumlahBahan
             // 
             this.txtJumlahBahan.Font = new System.Drawing.Font("Century", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtJumlahBahan.Location = new System.Drawing.Point(593, 45);
+            this.txtJumlahBahan.Location = new System.Drawing.Point(613, 50);
             this.txtJumlahBahan.Name = "txtJumlahBahan";
             this.txtJumlahBahan.Size = new System.Drawing.Size(204, 29);
             this.txtJumlahBahan.TabIndex = 5;
@@ -259,9 +258,9 @@
             this.grpDaftarKontrol.Controls.Add(this.dgvDaftarProduksi);
             this.grpDaftarKontrol.Font = new System.Drawing.Font("Century", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpDaftarKontrol.ForeColor = System.Drawing.Color.DarkGreen;
-            this.grpDaftarKontrol.Location = new System.Drawing.Point(12, 408);
+            this.grpDaftarKontrol.Location = new System.Drawing.Point(12, 388);
             this.grpDaftarKontrol.Name = "grpDaftarKontrol";
-            this.grpDaftarKontrol.Size = new System.Drawing.Size(823, 267);
+            this.grpDaftarKontrol.Size = new System.Drawing.Size(769, 214);
             this.grpDaftarKontrol.TabIndex = 3;
             this.grpDaftarKontrol.TabStop = false;
             this.grpDaftarKontrol.Text = "📋 DAFTAR PRODUKSI";
@@ -274,15 +273,16 @@
             this.dgvDaftarProduksi.Name = "dgvDaftarProduksi";
             this.dgvDaftarProduksi.RowHeadersWidth = 62;
             this.dgvDaftarProduksi.RowTemplate.Height = 28;
-            this.dgvDaftarProduksi.Size = new System.Drawing.Size(802, 227);
+            this.dgvDaftarProduksi.Size = new System.Drawing.Size(706, 169);
             this.dgvDaftarProduksi.TabIndex = 0;
+            this.dgvDaftarProduksi.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDaftarProduksi_CellContentClick);
             // 
             // btnTambah
             // 
             this.btnTambah.BackColor = System.Drawing.Color.Green;
             this.btnTambah.Font = new System.Drawing.Font("Century", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTambah.ForeColor = System.Drawing.Color.Ivory;
-            this.btnTambah.Location = new System.Drawing.Point(12, 681);
+            this.btnTambah.Location = new System.Drawing.Point(12, 608);
             this.btnTambah.Name = "btnTambah";
             this.btnTambah.Size = new System.Drawing.Size(122, 36);
             this.btnTambah.TabIndex = 4;
@@ -294,7 +294,7 @@
             this.btnUpdate.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnUpdate.Font = new System.Drawing.Font("Century", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdate.ForeColor = System.Drawing.Color.Ivory;
-            this.btnUpdate.Location = new System.Drawing.Point(140, 681);
+            this.btnUpdate.Location = new System.Drawing.Point(160, 608);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(122, 36);
             this.btnUpdate.TabIndex = 5;
@@ -306,7 +306,7 @@
             this.btnHapus.BackColor = System.Drawing.Color.DarkRed;
             this.btnHapus.Font = new System.Drawing.Font("Century", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHapus.ForeColor = System.Drawing.Color.Ivory;
-            this.btnHapus.Location = new System.Drawing.Point(268, 681);
+            this.btnHapus.Location = new System.Drawing.Point(315, 608);
             this.btnHapus.Name = "btnHapus";
             this.btnHapus.Size = new System.Drawing.Size(122, 36);
             this.btnHapus.TabIndex = 6;
@@ -317,7 +317,7 @@
             // btnKembali
             // 
             this.btnKembali.Font = new System.Drawing.Font("Century", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnKembali.Location = new System.Drawing.Point(698, 681);
+            this.btnKembali.Location = new System.Drawing.Point(688, 608);
             this.btnKembali.Name = "btnKembali";
             this.btnKembali.Size = new System.Drawing.Size(122, 36);
             this.btnKembali.TabIndex = 7;
@@ -330,7 +330,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1193, 729);
+            this.ClientSize = new System.Drawing.Size(984, 676);
             this.Controls.Add(this.btnKembali);
             this.Controls.Add(this.btnHapus);
             this.Controls.Add(this.btnUpdate);
@@ -343,12 +343,12 @@
             this.Margin = new System.Windows.Forms.Padding(9, 7, 9, 7);
             this.Name = "Produksi";
             this.Text = "DATA PRODUKSI";
+            this.Load += new System.EventHandler(this.Produksi_Load);
             this.grpDataKontrolKualitas.ResumeLayout(false);
             this.grpDataKontrolKualitas.PerformLayout();
             this.grpDaftarKontrol.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDaftarProduksi)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

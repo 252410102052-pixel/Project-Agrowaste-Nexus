@@ -84,6 +84,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -113,6 +114,12 @@
     </Compile>
     <Compile Include="Form\FormLaporan.Designer.cs">
       <DependentUpon>FormLaporan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\GrafikDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\GrafikDashboard.Designer.cs">
+      <DependentUpon>GrafikDashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="Form\KontrolKualitas.cs">
       <SubType>Form</SubType>
@@ -147,6 +154,7 @@
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\BatchLimbah.cs" />
     <Compile Include="Models\Distribusi.cs" />
+    <Compile Include="Models\FormLaporan.cs" />
     <Compile Include="Models\JadwalPengangkutanModel.cs" />
     <Compile Include="Models\KontrolKualitas.cs" />
     <Compile Include="Models\Pengguna.cs" />
@@ -156,12 +164,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\BatchLimbahRepository.cs" />
-    <Compile Include="Repositories\DistribusiRepositories.cs" />
+    <Compile Include="Repositories\DistribusiRepository.cs" />
+    <Compile Include="Repositories\FormLaporanRepository.cs" />
+    <Compile Include="Repositories\GrafikRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\JadwalPengangkutanRepository.cs" />
     <Compile Include="Repositories\KontrolKualitasRepository.cs" />
     <Compile Include="Repositories\PenggunaRepositories.cs" />
-    <Compile Include="Repositories\ProduksiRepositories.cs" />
+    <Compile Include="Repositories\ProduksiRepository.cs" />
     <EmbeddedResource Include="Form\BatchLimbah.resx">
       <DependentUpon>BatchLimbah.cs</DependentUpon>
     </EmbeddedResource>
@@ -215,6 +225,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Green background with bamboo leaves featuring bamboo, background, and green1.jpg" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Images\Produk\Arang_Briket.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Produk\Pakan_Ternak.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Produk\Pupuk_Kompos.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -31,9 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KontrolKualitas));
             this.llbTitle = new System.Windows.Forms.Label();
             this.grpDataKontrolKualitas = new System.Windows.Forms.GroupBox();
-            this.cmbStatusKualitas = new System.Windows.Forms.ComboBox();
             this.dtpTanggalPemeriksaan = new System.Windows.Forms.DateTimePicker();
-            this.txtcatatan = new System.Windows.Forms.TextBox();
+            this.txtCatatan = new System.Windows.Forms.TextBox();
             this.lblCatatan = new System.Windows.Forms.Label();
             this.lblStatuskualitas = new System.Windows.Forms.Label();
             this.lblNilaiKualitas = new System.Windows.Forms.Label();
@@ -49,6 +48,9 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnHapus = new System.Windows.Forms.Button();
             this.btnKembali = new System.Windows.Forms.Button();
+            this.lblJmlGagal = new System.Windows.Forms.Label();
+            this.txtJumlahLolos = new System.Windows.Forms.TextBox();
+            this.txtJumlahGagal = new System.Windows.Forms.TextBox();
             this.grpDataKontrolKualitas.SuspendLayout();
             this.grpDaftarKontrol.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -69,9 +71,11 @@
             // grpDataKontrolKualitas
             // 
             this.grpDataKontrolKualitas.BackColor = System.Drawing.Color.Transparent;
-            this.grpDataKontrolKualitas.Controls.Add(this.cmbStatusKualitas);
+            this.grpDataKontrolKualitas.Controls.Add(this.txtJumlahGagal);
+            this.grpDataKontrolKualitas.Controls.Add(this.txtJumlahLolos);
+            this.grpDataKontrolKualitas.Controls.Add(this.lblJmlGagal);
             this.grpDataKontrolKualitas.Controls.Add(this.dtpTanggalPemeriksaan);
-            this.grpDataKontrolKualitas.Controls.Add(this.txtcatatan);
+            this.grpDataKontrolKualitas.Controls.Add(this.txtCatatan);
             this.grpDataKontrolKualitas.Controls.Add(this.lblCatatan);
             this.grpDataKontrolKualitas.Controls.Add(this.lblStatuskualitas);
             this.grpDataKontrolKualitas.Controls.Add(this.lblNilaiKualitas);
@@ -83,20 +87,12 @@
             this.grpDataKontrolKualitas.Controls.Add(this.txtIdKontrol);
             this.grpDataKontrolKualitas.Font = new System.Drawing.Font("Century", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpDataKontrolKualitas.ForeColor = System.Drawing.Color.DarkGreen;
-            this.grpDataKontrolKualitas.Location = new System.Drawing.Point(18, 147);
+            this.grpDataKontrolKualitas.Location = new System.Drawing.Point(18, 121);
             this.grpDataKontrolKualitas.Name = "grpDataKontrolKualitas";
-            this.grpDataKontrolKualitas.Size = new System.Drawing.Size(823, 207);
+            this.grpDataKontrolKualitas.Size = new System.Drawing.Size(880, 253);
             this.grpDataKontrolKualitas.TabIndex = 1;
             this.grpDataKontrolKualitas.TabStop = false;
             this.grpDataKontrolKualitas.Text = "📋 DATA KONTROL KUALITAS";
-            // 
-            // cmbStatusKualitas
-            // 
-            this.cmbStatusKualitas.FormattingEnabled = true;
-            this.cmbStatusKualitas.Location = new System.Drawing.Point(593, 91);
-            this.cmbStatusKualitas.Name = "cmbStatusKualitas";
-            this.cmbStatusKualitas.Size = new System.Drawing.Size(204, 31);
-            this.cmbStatusKualitas.TabIndex = 10;
             // 
             // dtpTanggalPemeriksaan
             // 
@@ -106,20 +102,20 @@
             this.dtpTanggalPemeriksaan.Size = new System.Drawing.Size(200, 27);
             this.dtpTanggalPemeriksaan.TabIndex = 9;
             // 
-            // txtcatatan
+            // txtCatatan
             // 
-            this.txtcatatan.Font = new System.Drawing.Font("Century", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtcatatan.Location = new System.Drawing.Point(593, 145);
-            this.txtcatatan.Name = "txtcatatan";
-            this.txtcatatan.Size = new System.Drawing.Size(204, 29);
-            this.txtcatatan.TabIndex = 8;
+            this.txtCatatan.Font = new System.Drawing.Font("Century", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCatatan.Location = new System.Drawing.Point(203, 182);
+            this.txtCatatan.Name = "txtCatatan";
+            this.txtCatatan.Size = new System.Drawing.Size(200, 29);
+            this.txtCatatan.TabIndex = 8;
             // 
             // lblCatatan
             // 
             this.lblCatatan.AutoSize = true;
             this.lblCatatan.Font = new System.Drawing.Font("Century", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCatatan.ForeColor = System.Drawing.Color.Black;
-            this.lblCatatan.Location = new System.Drawing.Point(443, 145);
+            this.lblCatatan.Location = new System.Drawing.Point(6, 182);
             this.lblCatatan.Name = "lblCatatan";
             this.lblCatatan.Size = new System.Drawing.Size(77, 20);
             this.lblCatatan.TabIndex = 7;
@@ -132,9 +128,9 @@
             this.lblStatuskualitas.ForeColor = System.Drawing.Color.Black;
             this.lblStatuskualitas.Location = new System.Drawing.Point(443, 98);
             this.lblStatuskualitas.Name = "lblStatuskualitas";
-            this.lblStatuskualitas.Size = new System.Drawing.Size(139, 20);
+            this.lblStatuskualitas.Size = new System.Drawing.Size(121, 20);
             this.lblStatuskualitas.TabIndex = 5;
-            this.lblStatuskualitas.Text = "Status Kualitas";
+            this.lblStatuskualitas.Text = "Jumlah Lolos";
             this.lblStatuskualitas.Click += new System.EventHandler(this.label1_Click);
             // 
             // lblNilaiKualitas
@@ -268,12 +264,37 @@
             // btnKembali
             // 
             this.btnKembali.Font = new System.Drawing.Font("Century", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnKembali.ForeColor = System.Drawing.Color.DarkGreen;
             this.btnKembali.Location = new System.Drawing.Point(693, 655);
             this.btnKembali.Name = "btnKembali";
-            this.btnKembali.Size = new System.Drawing.Size(122, 36);
+            this.btnKembali.Size = new System.Drawing.Size(148, 36);
             this.btnKembali.TabIndex = 6;
             this.btnKembali.Text = " ⬅Kembali";
             this.btnKembali.UseVisualStyleBackColor = true;
+            // 
+            // lblJmlGagal
+            // 
+            this.lblJmlGagal.Font = new System.Drawing.Font("Century", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblJmlGagal.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblJmlGagal.Location = new System.Drawing.Point(443, 145);
+            this.lblJmlGagal.Name = "lblJmlGagal";
+            this.lblJmlGagal.Size = new System.Drawing.Size(166, 35);
+            this.lblJmlGagal.TabIndex = 10;
+            this.lblJmlGagal.Text = "Jumlah Gagal";
+            // 
+            // txtJumlahLolos
+            // 
+            this.txtJumlahLolos.Location = new System.Drawing.Point(593, 91);
+            this.txtJumlahLolos.Name = "txtJumlahLolos";
+            this.txtJumlahLolos.Size = new System.Drawing.Size(204, 32);
+            this.txtJumlahLolos.TabIndex = 11;
+            // 
+            // txtJumlahGagal
+            // 
+            this.txtJumlahGagal.Location = new System.Drawing.Point(593, 145);
+            this.txtJumlahGagal.Name = "txtJumlahGagal";
+            this.txtJumlahGagal.Size = new System.Drawing.Size(204, 32);
+            this.txtJumlahGagal.TabIndex = 12;
             // 
             // KontrolKualitas
             // 
@@ -313,9 +334,8 @@
         private System.Windows.Forms.TextBox txtIdProduksi;
         private System.Windows.Forms.Label lblNilaiKualitas;
         private System.Windows.Forms.Label lblStatuskualitas;
-        private System.Windows.Forms.TextBox txtcatatan;
+        private System.Windows.Forms.TextBox txtCatatan;
         private System.Windows.Forms.Label lblCatatan;
-        private System.Windows.Forms.ComboBox cmbStatusKualitas;
         private System.Windows.Forms.DateTimePicker dtpTanggalPemeriksaan;
         private System.Windows.Forms.GroupBox grpDaftarKontrol;
         private System.Windows.Forms.DataGridView dataGridView1;
@@ -323,5 +343,8 @@
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnHapus;
         private System.Windows.Forms.Button btnKembali;
+        private System.Windows.Forms.TextBox txtJumlahGagal;
+        private System.Windows.Forms.TextBox txtJumlahLolos;
+        private System.Windows.Forms.Label lblJmlGagal;
     }
 }

@@ -36,8 +36,6 @@
             this.lblIdPenerima = new System.Windows.Forms.Label();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.dtpTanggalPemeriksaan = new System.Windows.Forms.DateTimePicker();
-            this.txtHargaSatuan = new System.Windows.Forms.TextBox();
-            this.lblHargaSatuan = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblJumlahProduk = new System.Windows.Forms.Label();
             this.txtJumlahProduk = new System.Windows.Forms.TextBox();
@@ -87,8 +85,6 @@
             this.grpDataDistribusi.Controls.Add(this.lblIdPenerima);
             this.grpDataDistribusi.Controls.Add(this.cmbStatus);
             this.grpDataDistribusi.Controls.Add(this.dtpTanggalPemeriksaan);
-            this.grpDataDistribusi.Controls.Add(this.txtHargaSatuan);
-            this.grpDataDistribusi.Controls.Add(this.lblHargaSatuan);
             this.grpDataDistribusi.Controls.Add(this.lblStatus);
             this.grpDataDistribusi.Controls.Add(this.lblJumlahProduk);
             this.grpDataDistribusi.Controls.Add(this.txtJumlahProduk);
@@ -128,7 +124,7 @@
             // cmbStatus
             // 
             this.cmbStatus.FormattingEnabled = true;
-            this.cmbStatus.Location = new System.Drawing.Point(593, 145);
+            this.cmbStatus.Location = new System.Drawing.Point(593, 98);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(204, 31);
             this.cmbStatus.TabIndex = 10;
@@ -141,32 +137,12 @@
             this.dtpTanggalPemeriksaan.Size = new System.Drawing.Size(200, 27);
             this.dtpTanggalPemeriksaan.TabIndex = 9;
             // 
-            // txtHargaSatuan
-            // 
-            this.txtHargaSatuan.Font = new System.Drawing.Font("Century", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHargaSatuan.Location = new System.Drawing.Point(593, 102);
-            this.txtHargaSatuan.Name = "txtHargaSatuan";
-            this.txtHargaSatuan.Size = new System.Drawing.Size(204, 29);
-            this.txtHargaSatuan.TabIndex = 8;
-            // 
-            // lblHargaSatuan
-            // 
-            this.lblHargaSatuan.AutoSize = true;
-            this.lblHargaSatuan.Font = new System.Drawing.Font("Century", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHargaSatuan.ForeColor = System.Drawing.Color.Black;
-            this.lblHargaSatuan.Location = new System.Drawing.Point(413, 102);
-            this.lblHargaSatuan.Name = "lblHargaSatuan";
-            this.lblHargaSatuan.Size = new System.Drawing.Size(166, 20);
-            this.lblHargaSatuan.TabIndex = 7;
-            this.lblHargaSatuan.Text = "Harga Satuan (Rp)";
-            this.lblHargaSatuan.Click += new System.EventHandler(this.lblCatatan_Click);
-            // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("Century", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatus.ForeColor = System.Drawing.Color.Black;
-            this.lblStatus.Location = new System.Drawing.Point(413, 145);
+            this.lblStatus.Location = new System.Drawing.Point(413, 93);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(68, 20);
             this.lblStatus.TabIndex = 5;
@@ -264,6 +240,7 @@
             this.dgvDaftarDistribusii.RowTemplate.Height = 28;
             this.dgvDaftarDistribusii.Size = new System.Drawing.Size(802, 227);
             this.dgvDaftarDistribusii.TabIndex = 0;
+            this.dgvDaftarDistribusii.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDaftarDistribusii_CellContentClick);
             // 
             // btnTambah
             // 
@@ -276,6 +253,7 @@
             this.btnTambah.TabIndex = 5;
             this.btnTambah.Text = "➕Tambah";
             this.btnTambah.UseVisualStyleBackColor = false;
+            this.btnTambah.Click += new System.EventHandler(this.btnTambah_Click);
             // 
             // btnUpdate
             // 
@@ -307,7 +285,7 @@
             this.btnKembali.Font = new System.Drawing.Font("Century", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnKembali.Location = new System.Drawing.Point(713, 676);
             this.btnKembali.Name = "btnKembali";
-            this.btnKembali.Size = new System.Drawing.Size(122, 36);
+            this.btnKembali.Size = new System.Drawing.Size(148, 36);
             this.btnKembali.TabIndex = 8;
             this.btnKembali.Text = " ⬅Kembali";
             this.btnKembali.UseVisualStyleBackColor = true;
@@ -344,8 +322,6 @@
         private System.Windows.Forms.GroupBox grpDataDistribusi;
         private System.Windows.Forms.ComboBox cmbStatus;
         private System.Windows.Forms.DateTimePicker dtpTanggalPemeriksaan;
-        private System.Windows.Forms.TextBox txtHargaSatuan;
-        private System.Windows.Forms.Label lblHargaSatuan;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Label lblJumlahProduk;
         private System.Windows.Forms.TextBox txtJumlahProduk;

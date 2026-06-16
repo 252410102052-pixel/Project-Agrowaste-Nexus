@@ -27,35 +27,87 @@ namespace AgroWasteNexus.Forms
             lblWelcome.Text = "Selamat Datang : " + currentUser.Username;
             lblRole.Text = "ROLE : " + currentUser.Role;
 
-            switch (currentUser.Role)
+            AturAksesMenu();
+        }
+
+        private void AturAksesMenu()
+        {
+            string role = currentUser.Role.Trim().ToLower();
+
+            if (role == "admin")
             {
-                case "Admin":
-                    break;
-
-                case "Operator":
-                    btnQualityControl.Enabled = false;
-                    break;
-
-                case "Quality Control":
-                    btnBatchLimbah.Enabled = false;
-                    btnJadwal.Enabled = false;
-                    btnProduksi.Enabled = false;
-                    btnDistribusi.Enabled = false;
-                    btnLaporan.Enabled = false;
-                    break;
-
-                default:
-                    MessageBox.Show("Role tidak dikenali.");
-                    Application.Exit();
-                    break;
+                btnBatchLimbah.Enabled = true;
+                btnJadwal.Enabled = true;
+                btnProduksi.Enabled = true;
+                btnDistribusi.Enabled = true;
+                btnQualityControl.Enabled = true;
+                btnLaporan.Enabled = true;
             }
+            else if (role == "operator")
+            {
+                btnBatchLimbah.Enabled = true;
+                btnJadwal.Enabled = true;
+                btnProduksi.Enabled = true;
+                btnDistribusi.Enabled = true;
+                btnQualityControl.Enabled = false;
+                btnLaporan.Enabled = true;
+            }
+            else if (role == "quality control" || role == "qc")
+            {
+                btnBatchLimbah.Enabled = false;
+                btnJadwal.Enabled = false;
+                btnProduksi.Enabled = true;
+                btnDistribusi.Enabled = false;
+                btnQualityControl.Enabled = true;
+                btnLaporan.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Role tidak dikenali.");
+                Application.Exit();
+            }
+        }
+
+        private bool BisaAkses(string menu)
+        {
+            if (currentUser == null)
+                return false;
+
+            string role = currentUser.Role.Trim().ToLower();
+
+            if (role == "admin")
+                return true;
+
+            if (role == "operator")
+            {
+                return menu != "quality_control";
+            }
+
+            if (role == "quality control" || role == "qc")
+            {
+                return menu == "quality_control" ||
+                       menu == "produksi" ||
+                       menu == "laporan";
+            }
+
+            return false;
+        }
+
+        private void TampilkanPesanTidakAdaAkses(string namaMenu)
+        {
+            MessageBox.Show(
+                "Anda tidak memiliki akses ke menu " + namaMenu + "!",
+                "Akses Ditolak",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            );
         }
 
         private void btnBatchLimbah_Click(object sender, EventArgs e)
         {
-            if (currentUser.Role == "Quality Control")
+            if (!BisaAkses("batch_limbah"))
             {
-                MessageBox.Show("Anda tidak memiliki akses ke menu Batch Limbah!");
+                TampilkanPesanTidakAdaAkses("Batch Limbah");
                 return;
             }
 
@@ -65,9 +117,9 @@ namespace AgroWasteNexus.Forms
 
         private void btnJadwal_Click(object sender, EventArgs e)
         {
-            if (currentUser.Role == "Quality Control")
+            if (!BisaAkses("jadwal"))
             {
-                MessageBox.Show("Anda tidak memiliki akses ke menu Jadwal Pengangkutan!");
+                TampilkanPesanTidakAdaAkses("Jadwal Pengangkutan");
                 return;
             }
 
@@ -77,9 +129,9 @@ namespace AgroWasteNexus.Forms
 
         private void btnProduksi_Click(object sender, EventArgs e)
         {
-            if (currentUser.Role == "Quality Control")
+            if (!BisaAkses("produksi"))
             {
-                MessageBox.Show("Anda tidak memiliki akses ke menu Produksi!");
+                TampilkanPesanTidakAdaAkses("Produksi");
                 return;
             }
 
@@ -89,9 +141,9 @@ namespace AgroWasteNexus.Forms
 
         private void btnDistribusi_Click(object sender, EventArgs e)
         {
-            if (currentUser.Role == "Quality Control")
+            if (!BisaAkses("distribusi"))
             {
-                MessageBox.Show("Anda tidak memiliki akses ke menu Distribusi!");
+                TampilkanPesanTidakAdaAkses("Distribusi");
                 return;
             }
 
@@ -101,9 +153,9 @@ namespace AgroWasteNexus.Forms
 
         private void btnQualityControl_Click(object sender, EventArgs e)
         {
-            if (currentUser != null && currentUser.Role == "Operator")
+            if (!BisaAkses("quality_control"))
             {
-                MessageBox.Show("Anda tidak memiliki akses ke menu Quality Control!");
+                TampilkanPesanTidakAdaAkses("Quality Control");
                 return;
             }
 
@@ -113,6 +165,12 @@ namespace AgroWasteNexus.Forms
 
         private void btnLaporan_Click(object sender, EventArgs e)
         {
+            if (!BisaAkses("laporan"))
+            {
+                TampilkanPesanTidakAdaAkses("Laporan");
+                return;
+            }
+
             FormLaporan frm = new FormLaporan();
             frm.ShowDialog();
         }
@@ -123,7 +181,8 @@ namespace AgroWasteNexus.Forms
                 "Apakah Anda yakin ingin logout?",
                 "Konfirmasi Logout",
                 MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
+                MessageBoxIcon.Question
+            );
 
             if (result == DialogResult.Yes)
             {
@@ -131,6 +190,18 @@ namespace AgroWasteNexus.Forms
                 login.Show();
                 this.Close();
             }
+        }
+
+        private void btnGrafik_Click(object sender, EventArgs e)
+        {
+            if (!BisaAkses("laporan"))
+            {
+                TampilkanPesanTidakAdaAkses("Grafik Dashboard");
+                return;
+            }
+
+            GrafikDashboard frm = new GrafikDashboard();
+            frm.ShowDialog();
         }
     }
 }
